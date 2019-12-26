@@ -8,15 +8,22 @@ const {
 
 /* GET users listing. */
 router.get('/print-in-display', function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     if (req.query.message) {
         exec(`echo ${req.query.message}>COM1`, (err, stdout, stderr) => {
             // console.log(stdout);
-            res.send(`<pre>${stdout || err}</pre>`);
+            res.json({
+                response: stdout,
+                error: err
+            });
         });
     } else {
         exec(`ipconfig`, (err, stdout, stderr) => {
             // console.log(stdout);
-            res.send(`<pre>${stdout}</pre>`);
+            res.json({
+                response: stdout,
+                error: err
+            });
         });
     }
 });
