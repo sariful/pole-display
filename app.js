@@ -24,8 +24,8 @@
     
 
     
-    var indexRouter = require('./routes/index');
-    app.use('/', indexRouter);
+    // var indexRouter = require('./routes/index');
+    // app.use('/', indexRouter);
     
     
     var apiRouter = require('./routes/api');

@@ -7,6 +7,9 @@
 var app = require('../app');
 var debug = require('debug')('files:server');
 var http = require('http');
+const {
+    exec
+} = require('child_process');
 
 /**
  * Get port from environment and store in Express.
@@ -27,6 +30,16 @@ var server = http.createServer(app);
 
 server.listen(port, function () {
     console.log('Listening on port: ' + port);
+
+    exec(`mode COM2 96, n, 8, 1`, (err, stdout, stderr) => {
+        console.log(err || stdout || 'Connected');
+    });
+
+    setTimeout(() => {
+        exec(`echo Hi>COM2 && echo Welcome>COM2`, (err, stdout, stderr) => {
+            console.log(err || stdout || 'Connected');
+        });
+    }, 1200);
 });
 server.on('error', onError);
 server.on('listening', onListening);

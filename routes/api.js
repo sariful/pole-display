@@ -9,9 +9,9 @@ const {
 /* GET users listing. */
 router.get('/print-in-display', function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    if (req.query.message) {
-        exec(`echo ${req.query.message}>COM1`, (err, stdout, stderr) => {
-            // console.log(stdout);
+    if (req.query.message2) {
+        exec(`echo ${req.query.message2 || 'Here'}>COM2 && echo ${req.query.message1 || 'Welcome'}>COM2`, (err, stdout, stderr) => {
+            // console.log(err || stdout);
             res.json({
                 response: stdout,
                 error: err
@@ -19,7 +19,7 @@ router.get('/print-in-display', function (req, res, next) {
         });
     } else {
         exec(`ipconfig`, (err, stdout, stderr) => {
-            // console.log(stdout);
+            console.log(err || stdout);
             res.json({
                 response: stdout,
                 error: err
